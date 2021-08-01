@@ -1,0 +1,66 @@
+﻿@model EatTogether.Models.SessionModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<div class="jumbotron" style="margin-top: 50px; background-color: white; height: 100%; font-family: Berlin Sans FB;">
+    <div>
+        <h4>SessionModel</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.UserCount)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserCount)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.City)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.City)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Place)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Place.Name)
+            </dd>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @if (ViewBag.newwhole || ViewBag.turnIndex)
+        {
+            @Html.ActionLink("Back to List", "Index")
+        }
+        else
+        {
+            @Html.ActionLink("Back to List", "JoinSessions")
+        }
+
+    </p>
+</div>

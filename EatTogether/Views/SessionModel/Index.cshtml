@@ -1,0 +1,94 @@
+﻿@model EatTogether.Models.SessionModel
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="jumbotron" style="margin-top: 50px; background-color: white; height: 100%; font-family: Berlin Sans FB; ">
+    <h1 style="color:black; font-size:1.5em;">Sessions that I created</h1>
+    <div id="tableDiv"></div>
+    <div id="sessionCreateForm"></div>
+    @using (Ajax.BeginForm("AJAXCreate", "SessionModel", new AjaxOptions
+    {
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "POST",
+        UpdateTargetId = "tableDiv"
+    }))
+
+    {
+        <div class="form-group">
+            @Html.AntiForgeryToken()
+            @Html.LabelFor(model => model.UserCount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserCount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserCount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", type = "datetime-local" } })
+                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Place.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PlaceName, new { htmlAttributes = new { @class = "form-control", id = "PlaceAutocomplete" } })
+                @Html.ValidationMessageFor(model => model.PlaceName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div>
+            @Html.HiddenFor(model => model.Place.Type, new { id = "PlaceTypeData" })
+            @Html.HiddenFor(model => model.Place.Name, new { id = "PlaceNameData" })
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create Session" class="btn btn-default" />
+            </div>
+        </div>
+    }
+    <h1 style="color:black; font-size:1.5em;">Sessions that I joined</h1>
+    <div id="tableDiv2" style="top:100px;"></div>
+    @using (Ajax.BeginForm("AJAXCreate", "SessionModel", new AjaxOptions
+    {
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "POST",
+        UpdateTargetId = "tableDiv2"
+    })) { }
+    <h1 style="color:black; font-size:1.5em;">Expired Sessions</h1>
+    <div id="tableDiv3" style="top:100px;"></div>
+    @using (Ajax.BeginForm("AJAXCreate", "SessionModel", new AjaxOptions
+    {
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "POST",
+        UpdateTargetId = "tableDiv3"
+    })) { }
+</div>
+
+@section Scripts{
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Custom_Scripts/GenerateTable.js"></script>
+    <script src="~/Custom_Scripts/GenerateTableJoined.js"></script>
+    <script src="~/Custom_Scripts/PlacesAPI.js"></script>
+    <script src="~/Custom_Scripts/GenerateTableExpired.js"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyCeylSk7TTyCBiDeBk33B9iC8HV69inM-8&callback=callPlaces"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

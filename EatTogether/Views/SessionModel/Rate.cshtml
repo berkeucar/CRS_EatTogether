@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Rate";
+}
+
+<div class="jumbotron" style="margin-top: 50px; background-color: white; height: 100%; font-family: Berlin Sans FB; ">
+    @if (ViewBag.empty)
+    {
+        <h1>
+            There is no user left for you to score.
+        </h1>
+        @Html.ActionLink("Back to List", "Index")
+    }
+    else
+    {
+        using (Html.BeginForm("UpdateUserScore", "SessionModel", FormMethod.Post))
+        {
+            <table class="table">
+                <tr>
+                    Rate the users of the selected session:
+                </tr>
+
+                <tr>
+                    <td>User Name:</td>
+                    <td>@Html.DropDownList("User", (SelectList)ViewBag.userList, "Please Select the User")</td>
+                </tr>
+                <tr>
+                    <td>Score</td>
+                    <td>
+                        @Html.DropDownList("Score", new SelectList(new[] { "1", "2", "3", "4", "5" }), "Please select")
+                    </td>
+                    <td>
+                        @Html.Hidden("InheritedId", (object)ViewBag.sessionId)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" name="Score!" value="Submit" />
+                    </td>
+                </tr>
+            </table>
+        }
+    }
+</div>
+
+
+

@@ -1,0 +1,84 @@
+﻿@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <style>
+            .navbar {
+                padding-top: 10px;
+                padding-bottom: 10px;
+                background-image: url('../../Content/Images/layoutbackground.jpg');
+                background-size: auto;
+                background-position: center center;
+                background-repeat: no-repeat;
+                margin: auto;
+                font-family: 'Script MT';
+            }
+        </style>
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("EaTogether", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", @style = "color:#ffd502;font-size:2.5em" } )
+                
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("About", "About", "Home", null, new { @style = "color:#ffd502;font-size:1.5em" })</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home", null, new { @style = "color:#ffd502;font-size:1.5em" })</li>
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("My Sessions", "Index", "SessionModel", null, new { @style = "color:#ffd502;font-size:1.5em" })</li>
+                        <li>@Html.ActionLink("Join Sessions", "JoinSessions", "SessionModel", null, new { @style = "color:#ffd502;font-size:1.5em" })</li>
+                    }
+
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        
+        <footer class="footer">
+            <style>
+                .footer {
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                    left: 0px;
+                    background-image: url('../../Content/Images/layoutbackground.jpg');
+                    background-size: auto;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    margin: auto;
+                    color: #ffd502;
+                    position: fixed;
+                    bottom: 0px;
+                    width: 100%;
+                    text-align: center;
+                    font-family: 'Script MT';
+                }
+            </style>
+            <p >&copy; @DateTime.Now.Year - EaTogether</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
